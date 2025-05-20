@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mindful Haven - Mental Health Support</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.22.9/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Poppins", "sans-serif"],
+            },
+            fontSize: {
+              "display-1": ["52px", { lineHeight: "78px" }],
+              "display-2": ["44px", { lineHeight: "66px" }],
+              "heading-1": ["40px", { lineHeight: "60px" }],
+              "heading-2": ["36px", { lineHeight: "54px" }],
+              "heading-3": ["32px", { lineHeight: "48px" }],
+              "heading-4": ["28px", { lineHeight: "42px" }],
+              "heading-5": ["24px", { lineHeight: "36px" }],
+              "heading-6": ["20px", { lineHeight: "30px" }],
+              "body-1": ["18px", { lineHeight: "27px" }],
+              "body-2": ["16px", { lineHeight: "24px" }],
+              "body-3": ["14px", { lineHeight: "21px" }],
+              "body-4": ["12px", { lineHeight: "18px" }],
+            },
+            fontWeight: {
+              regular: 400,
+              "semi-bold": 600,
+              bold: 700,
+            },
+            colors: {
+              primary: {
+                DEFAULT: "#0D9488", // teal-600
+              },
+              secondary: {
+                DEFAULT: "#2563EB", // blue-600
+              },
+              neutral: {
+                50: "#F9FAFB", // gray-50
+                100: "#F3F4F6", // gray-100
+              },
+            },
+            spacing: {
+              2: "8px",
+              4: "16px",
+              6: "24px",
+              8: "32px",
+              10: "40px",
+              12: "48px",
+              14: "56px",
+              16: "64px",
+              18: "72px",
+              20: "80px",
+              22: "88px",
+              24: "96px",
+              26: "104px",
+              28: "112px",
+              30: "120px",
+              32: "128px",
+              34: "136px",
+              36: "144px",
+              38: "152px",
+              40: "160px",
+            },
+            margin: {
+              20: "80px",
+            },
+            gap: {
+              10: "40px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const { useState } = React;
+      const { createRoot } = ReactDOM;
+
+      // Header Component
+      const Header = () => {
+        const [isOpen, setIsOpen] = useState(false);
+
+        const toggleMenu = () => {
+          setIsOpen(!isOpen);
+        };
+
+        return (
+          <nav className="bg-primary/95 backdrop-blur-md text-white px-20 py-6 sticky top-0 z-20 shadow-lg">
+            <div className="container mx-auto flex justify-between items-center">
+              <h1 className="text-heading-1 font-bold tracking-tight">
+                Mindful Haven
+              </h1>
+              <div className="md:hidden">
+                <button
+                  onClick={toggleMenu}
+                  aria-label={isOpen ? "Close menu" : "Open menu"}
+                  className="text-white focus:outline-none"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    {isOpen ? (
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    ) : (
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M4 6h16M4 12h16M4 18h16"
+                      />
+                    )}
+                  </svg>
+                </button>
+              </div>
+              <div className="hidden md:flex space-x-6">
+                <a
+                  href="#home"
+                  className="text-body-1 font-regular hover:text-secondary transition-colors duration-300"
+                  aria-current={
+                    window.location.hash === "#home" ? "page" : undefined
+                  }
+                >
+                  Home
+                </a>
+                <a
+                  href="#about"
+                  className="text-body-1 font-regular hover:text-secondary transition-colors duration-300"
+                  aria-current={
+                    window.location.hash === "#about" ? "page" : undefined
+                  }
+                >
+                  About
+                </a>
+                <a
+                  href="#services"
+                  className="text-body-1 font-regular hover:text-secondary transition-colors duration-300"
+                  aria-current={
+                    window.location.hash === "#services" ? "page" : undefined
+                  }
+                >
+                  Services
+                </a>
+              </div>
+            </div>
+            {isOpen && (
+              <div className="md:hidden bg-primary/95 px-20 py-4">
+                <div className="flex flex-col space-y-4">
+                  <a
+                    href="#home"
+                    className="text-body-1 font-regular hover:text-secondary transition-colors duration-300"
+                    onClick={toggleMenu}
+                  >
+                    Home
+                  </a>
+                  <a
+                    href="#about"
+                    className="text-body-1 font-regular hover:text-secondary transition-colors duration-300"
+                    onClick={toggleMenu}
+                  >
+                    About
+                  </a>
+                  <a
+                    href="#services"
+                    className="text-body-1 font-regular hover:text-secondary transition-colors duration-300"
+                    onClick={toggleMenu}
+                  >
+                    Services
+                  </a>
+                </div>
+              </div>
+            )}
+          </nav>
+        );
+      };
+
+      // Hero Section Component
+      const HeroSection = () => (
+        <section
+          id="home"
+          className="bg-gradient-to-r from-primary to-secondary text-white py-20"
+        >
+          <div className="container mx-auto text-center px-20">
+            <h2 className="text-display-1 font-bold mb-6">
+              Find Your Inner Peace
+            </h2>
+            <p className="text-body-1 font-regular mb-8 max-w-2xl mx-auto">
+              Simple, trusted tools to support your mental well-being, tailored
+              to your busy life.
+            </p>
+            <a
+              href="#services"
+              className="bg-white text-primary px-6 py-3 rounded-full text-body-1 font-semi-bold hover:bg-neutral-100 transition"
+            >
+              Explore Services
+            </a>
+          </div>
+        </section>
+      );
+
+      // Why Choose Us Section
+      const WhyChooseUs = () => (
+        <section className="py-16 bg-neutral-100">
+          <div className="container mx-auto text-center px-20">
+            <h2 className="text-heading-2 font-bold mb-8">
+              Why Our Mental Health Consultants are the Best Choice
+            </h2>
+            <p className="text-body-1 font-regular mb-12 max-w-2xl mx-auto">
+              Our platform offers personalized, expert-guided, and self-paced
+              tools designed to help you understand yourself better, manage
+              stress, and achieve mental clarity, all in a way that fits your
+              schedule.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                <h3 className="text-heading-5 font-semi-bold mb-4">
+                  Trusted Experts
+                </h3>
+                <p className="text-body-2 font-regular">
+                  Connect with qualified professionals who provide consistent,
+                  reliable support tailored to your needs.
+                </p>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                <h3 className="text-heading-5 font-semi-bold mb-4">
+                  Simple Tools
+                </h3>
+                <p className="text-body-2 font-regular">
+                  Access quick exercises like breathing techniques and
+                  mindfulness to reduce stress in minutes.
+                </p>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                <h3 className="text-heading-5 font-semi-bold mb-4">
+                  Flexible Support
+                </h3>
+                <p className="text-body-2 font-regular">
+                  Choose self-guided resources or expert consultations based on
+                  your comfort level and time.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+
+      // Services Section
+      const ServicesSection = () => (
+        <section id="services" className="py-16 bg-white">
+          <div className="container mx-auto text-center px-20">
+            <h2 className="text-heading-2 font-bold mb-8">
+              Empowering Minds: Our Mental Health Consulting Services
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+              <div className="bg-neutral-50 p-6 rounded-lg shadow-md">
+                <h3 className="text-heading-5 font-semi-bold mb-4">
+                  Guided Meditation
+                </h3>
+                <p className="text-body-2 font-regular mb-4">
+                  Short, calming sessions to help you find mental clarity and
+                  reduce daily stress.
+                </p>
+                <a
+                  href="#services"
+                  className="inline-block bg-primary text-white px-4 py-2 rounded-full text-body-2 font-semi-bold hover:bg-teal-700 transition"
+                >
+                  Start Now
+                </a>
+              </div>
+              <div className="bg-neutral-50 p-6 rounded-lg shadow-md">
+                <h3 className="text-heading-5 font-semi-bold mb-4">
+                  Breathing Exercises
+                </h3>
+                <p className="text-body-2 font-regular mb-4">
+                  Quick techniques to manage anxiety and stay grounded, perfect
+                  for busy schedules.
+                </p>
+                <a
+                  href="#services"
+                  className="inline-block bg-primary text-white px-4 py-2 rounded-full text-body-2 font-semi-bold hover:bg-teal-700 transition"
+                >
+                  Try It
+                </a>
+              </div>
+              <div className="bg-neutral-50 p-6 rounded-lg shadow-md">
+                <h3 className="text-heading-5 font-semi-bold mb-4">
+                  Journaling Prompts
+                </h3>
+                <p className="text-body-2 font-regular mb-4">
+                  Structured writing exercises to help you process emotions and
+                  gain self-awareness.
+                </p>
+                <a
+                  href="#services"
+                  className="inline-block bg-primary text-white px-4 py-2 rounded-full text-body-2 font-semi-bold hover:bg-teal-700 transition"
+                >
+                  Begin Writing
+                </a>
+              </div>
+              <div className="bg-neutral-50 p-6 rounded-lg shadow-md">
+                <h3 className="text-heading-5 font-semi-bold mb-4">
+                  Expert Consultations
+                </h3>
+                <p className="text-body-2 font-regular mb-4">
+                  Connect with trusted professionals for personalized support
+                  when you need it most.
+                </p>
+                <a
+                  href="#services"
+                  className="inline-block bg-primary text-white px-4 py-2 rounded-full text-body-2 font-semi-bold hover:bg-teal-700 transition"
+                >
+                  Book Now
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+
+      // About Section
+      const AboutSection = () => (
+        <section id="about" className="py-16 bg-neutral-50">
+          <div className="container mx-auto text-center px-20">
+            <h2 className="text-heading-2 font-bold mb-8">
+              About Mindful Haven
+            </h2>
+            <p className="text-body-1 font-regular mb-6 max-w-2xl mx-auto">
+              Mindful Haven is designed for individuals like you—busy,
+              ambitious, and seeking balance. We understand the challenges of
+              finding time for mental health, so we’ve created a platform that’s
+              simple, effective, and tailored to your needs. Whether you prefer
+              self-guided tools or expert support, we’re here to help you
+              achieve mental clarity and emotional resilience.
+            </p>
+            <p className="text-body-1 font-regular max-w-2xl mx-auto">
+              Our mission is to empower you to understand yourself better and
+              manage stress with confidence, all through a user-friendly and
+              trusted experience.
+            </p>
+          </div>
+        </section>
+      );
+
+      // Footer Component
+      const Footer = () => (
+        <footer className="bg-primary text-white py-16">
+          <div className="container mx-auto px-20">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+              <div>
+                <h3 className="text-heading-5 font-semi-bold mb-4">
+                  Mindful Haven
+                </h3>
+                <p className="text-body-2 font-regular mb-4">
+                  Empowering your mental well-being with simple, trusted tools
+                  and expert support.
+                </p>
+                <p className="text-body-3 font-regular">
+                  © {new Date().getFullYear()} Mindful Haven. All rights
+                  reserved.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-heading-5 font-semi-bold mb-4">
+                  Quick Links
+                </h3>
+                <ul className="space-y-2">
+                  <li>
+                    <a
+                      href="#home"
+                      className="text-body-2 font-regular hover:text-secondary transition-colors duration-300"
+                    >
+                      Home
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#about"
+                      className="text-body-2 font-regular hover:text-secondary transition-colors duration-300"
+                    >
+                      About
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#services"
+                      className="text-body-2 font-regular hover:text-secondary transition-colors duration-300"
+                    >
+                      Services
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-heading-5 font-semi-bold mb-4">
+                  Contact Us
+                </h3>
+                <p className="text-body-2 font-regular mb-2">
+                  Email:{" "}
+                  <a
+                    href="mailto:support@mindfulhaven.com"
+                    className="hover:text-secondary transition-colors duration-300"
+                  >
+                    support@mindfulhaven.com
+                  </a>
+                </p>
+                <p className="text-body-2 font-regular mb-2">
+                  Phone:{" "}
+                  <a
+                    href="tel:+1234567890"
+                    className="hover:text-secondary transition-colors duration-300"
+                  >
+                    +1 (234) 567-890
+                  </a>
+                </p>
+                <p className="text-body-2 font-regular">
+                  Address: 123 Wellness Way, Serenity City, SC 12345
+                </p>
+              </div>
+            </div>
+          </div>
+        </footer>
+      );
+
+      // Main App Component
+      const App = () => (
+        <div>
+          <Header />
+          <HeroSection />
+          <WhyChooseUs />
+          <ServicesSection />
+          <AboutSection />
+          <Footer />
+        </div>
+      );
+
+      // Render the app
+      const root = createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
